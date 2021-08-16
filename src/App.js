@@ -43,6 +43,8 @@ function App() {
       title: 'PIC',
       dataIndex: 'pic',
       key: 'pic',
+      sorter: (a, b) => a.pic - b.pic,
+      sortDirections: ['descend']
     },
     {
       title: 'Dependents',
@@ -93,7 +95,7 @@ function App() {
   return (
     <>
     <div className="App">
-      <Table columns={columns} dataSource={dataDummy}/>
+      <Table columns={columns} dataSource={dataDummy} size="middle"/>
     </div>
     <Modal 
       title="Basic Modal" 
