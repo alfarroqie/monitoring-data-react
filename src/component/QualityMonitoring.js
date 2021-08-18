@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { Table, Space, Button, Modal } from 'antd';
+import { Table, Space, Button, Modal, Input } from 'antd';
+// import { SearchOutlined } from '@ant-design/icons'
 
 import dataDummy from '../data/dataQualityDummy.json'
 import Chart from '../chart/chart'
@@ -42,8 +43,6 @@ function QualityMonitoring() {
       title: 'PIC',
       dataIndex: 'pic',
       key: 'pic',
-      sorter: (a, b) => a.pic - b.pic,
-      sortDirections: ['descend']
     },
     {
       title: 'Dependents',
@@ -59,6 +58,8 @@ function QualityMonitoring() {
       title: 'Current Value',
       dataIndex: 'current_value',
       key: 'current_value',
+      sorter: (a, b) => a.current_value - b.current_value,
+      sortDirections: ['ascend', 'descend']
     },
     {
       title: 'Treshold',
@@ -79,6 +80,8 @@ function QualityMonitoring() {
       title: 'Aging',
       dataIndex: 'aging',
       key: 'aging',
+      sorter: (a, b) => a.aging - b.aging,
+      sortDirections: ['ascend', 'descend'],
     },
     {
       title: 'Actions',
@@ -91,10 +94,32 @@ function QualityMonitoring() {
       ),
     },
   ]
+
+  const [dataSource, setDataSource] = useState(dataDummy);
+  const [value, setValue] = useState('');
+
   return (
     <>
     <div className="App">
-      <Table columns={columns} dataSource={dataDummy} size="middle"/>
+      <div style={{ padding: 8 }}>
+          <Input
+            placeholder={`Search in Group `}
+            // value=""
+            // onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            // onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            value={value}
+            onChange={e => {
+              const currValue = e.target.value;
+              setValue(currValue);
+              const filteredData = dataDummy.filter(entry =>
+                entry.group.toLowerCase().includes(currValue.toLowerCase())
+              );
+              setDataSource(filteredData);
+            }}
+            style={{ marginBottom: 8, display: 'block' }}
+          />
+      </div>
+      <Table columns={columns} dataSource={dataSource} size="middle"/>
     </div>
     <Modal 
       title="Basic Modal" 
