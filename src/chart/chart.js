@@ -29,6 +29,7 @@ function Chart() {
 
         //formatting date
         chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+        chart.numberFormatter.numberFormat = "#.##";
 
         //Create Axis
         var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
