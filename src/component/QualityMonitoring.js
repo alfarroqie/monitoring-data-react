@@ -3,7 +3,7 @@ import { Table, Space, Button, Modal, Input } from 'antd';
 // import { SearchOutlined } from '@ant-design/icons'
 
 import dataDummy from '../data/dataQualityDummy.json'
-import Chart from '../chart/chart'
+import Chart from '../chart/ChartQualityMonitoring'
 
 function QualityMonitoring() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -62,9 +62,11 @@ function QualityMonitoring() {
       sortDirections: ['ascend', 'descend']
     },
     {
-      title: 'Treshold',
-      dataIndex: 'treshold',
-      key: 'treshold',
+      title: 'Threshold',
+      dataIndex: 'threshold',
+      key: 'threshold',
+      sorter: (a, b) => a.threshold - b.threshold,
+      sortDirections: ['ascend', 'descend'],
     },
     {
       title: 'Status',
@@ -118,7 +120,7 @@ function QualityMonitoring() {
   }
   return (
     <>
-    <div className="App">
+    <div className="QualityMonitoring">
       <div style={{ padding: 8 }}>
           <Input
             placeholder={`Search`}

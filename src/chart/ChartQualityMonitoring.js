@@ -68,10 +68,10 @@ function Chart() {
         // chart.scrollbarY.parent = chart.leftAxesContainer;
         // chart.scrollbarY.toBack();
 
-        // Create a horizontal scrollbar with previe and place it underneath the date axis
-        chart.scrollbarX = new am4charts.XYChartScrollbar();
-        chart.scrollbarX.series.push(series);
-        chart.scrollbarX.parent = chart.bottomAxesContainer;
+        // // Create a horizontal scrollbar with previe and place it underneath the date axis
+        // chart.scrollbarX = new am4charts.XYChartScrollbar();
+        // chart.scrollbarX.series.push(series);
+        // chart.scrollbarX.parent = chart.bottomAxesContainer;
 
         c.current = chart;
 
@@ -82,7 +82,7 @@ function Chart() {
     }, [])
 
     return (
-        <div id="DataChart" style={{ width: "100%", height: "500px" }}></div>
+        <div id="DataChart" style={{ width: "100%", height: "300px" }}></div>
     )
 }
 

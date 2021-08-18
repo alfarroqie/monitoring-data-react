@@ -4,6 +4,7 @@ import { Layout, Menu, } from 'antd';
 import { UserOutlined, MonitorOutlined, DatabaseFilled } from '@ant-design/icons';
 import { Switch, Route, Link} from 'react-router-dom';
 import QualityMonitoring from './component/QualityMonitoring';
+import UserLog from './component/UserLog';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -24,10 +25,11 @@ function App() {
             // defaultOpenKeys={['sidenav1']}
             style={{ height: '100%', borderRight: 0 }}
             onClick={(e) => setNavigateKey(e.key)}
+            theme="dark"
           >
             <SubMenu key="sidenav1" icon={<DatabaseFilled />} title="Data">
               <Menu.Item key="qualityMonitoring" icon={<MonitorOutlined />}><Link to='/qualityMonitoring'/>Quality Monitoring</Menu.Item>
-              <Menu.Item key="userLog" icon={<UserOutlined />}>User Log</Menu.Item>
+              <Menu.Item key="userLog" icon={<UserOutlined />}><Link to='/userLog'/>User Log</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -47,6 +49,7 @@ function App() {
           >
             <Switch>
               <Route exact path="/qualityMonitoring" component={QualityMonitoring} />
+              <Route exact path="/userLog" component={UserLog} />
             </Switch>
           </Content>
         </Layout>
