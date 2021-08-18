@@ -96,26 +96,34 @@ function QualityMonitoring() {
   ]
 
   const [dataSource, setDataSource] = useState(dataDummy);
-  const [value, setValue] = useState('');
+  const [valueSearch, setValueSearch] = useState('');
 
+  function handleSearch (key){
+    const currValue = key;
+    setValueSearch(currValue);
+    const filteredData = dataDummy.filter(entry =>
+      entry.date.toString().includes(currValue.toLowerCase()) ||
+      entry.group.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.source.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.pic.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.dependents.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.kpi.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.current_value.toString().includes(currValue.toLowerCase()) ||
+      entry.threshold.toString().includes(currValue.toLowerCase()) ||
+      entry.status.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.remark.toLowerCase().includes(currValue.toLowerCase()) ||
+      entry.aging.toString().includes(currValue.toLowerCase())
+    );
+    setDataSource(filteredData);
+  }
   return (
     <>
     <div className="App">
       <div style={{ padding: 8 }}>
           <Input
-            placeholder={`Search in Group `}
-            // value=""
-            // onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            // onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            value={value}
-            onChange={e => {
-              const currValue = e.target.value;
-              setValue(currValue);
-              const filteredData = dataDummy.filter(entry =>
-                entry.group.toLowerCase().includes(currValue.toLowerCase())
-              );
-              setDataSource(filteredData);
-            }}
+            placeholder={`Search`}
+            value={valueSearch}
+            onChange={e => handleSearch(e.target.value)}
             style={{ marginBottom: 8, display: 'block' }}
           />
       </div>
