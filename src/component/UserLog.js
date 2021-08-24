@@ -1,26 +1,11 @@
 import React, {useState} from 'react';
-import { Table, Space, Button, Modal, Input } from 'antd';
-// import { SearchOutlined } from '@ant-design/icons'
+import { Table, Input } from 'antd';
 
-import dataUserLog from '../data/userlog.json'
-// import Chart from '../chart/ChartQualityMonitoring'
+import dataLog from '../data/userModuleLogs.json'
+
 
 function UserLog() {
-//   const [isModalVisible, setIsModalVisible] = useState(false);
-//   const [modalKey, setModalKey] = useState("1");
-      
-//   function showModal(id){
-//     setModalKey(id);
-//     setIsModalVisible(true);
-//   };
-      
-//   const handleOk = () => {
-//     setIsModalVisible(false);
-//   };
-      
-//   const handleCancel = () => {
-//     setIsModalVisible(false);
-//   };
+  const dataUserModuleLog = dataLog.data.user_module_logs;
 
   const columns = [
     {
@@ -54,25 +39,15 @@ function UserLog() {
       dataIndex: 'module_name',
       key: 'module_name',
     },
-    // {
-    //   title: 'Actions',
-    //   dataIndex: '_id',
-    //   key: '_id',
-    //   render: (text, record) => (
-    //     <Space size="middle">
-    //       <Button type="link" onClick={() => showModal(record._id)}>Last 30 Days</Button>
-    //     </Space>
-    //   ),
-    // },
   ]
 
-  const [dataSource, setDataSource] = useState(dataUserLog);
+  const [dataSource, setDataSource] = useState(dataUserModuleLog);
   const [valueSearch, setValueSearch] = useState('');
 
   function handleSearch(key){
     const currValue = key;
     setValueSearch(currValue);
-    const filteredData = dataUserLog.filter(entry =>
+    const filteredData = dataUserModuleLog.filter(entry =>
       entry.date.includes(currValue.toLowerCase()) ||
       entry.module_id.toString().includes(currValue.toLowerCase()) ||
       entry.module_type.toLowerCase().includes(currValue.toLowerCase()) ||
@@ -95,17 +70,6 @@ function UserLog() {
       </div>
       <Table columns={columns} dataSource={dataSource} size="middle"/>
     </div>
-    {/* <Modal 
-      title="Basic Modal" 
-      visible={isModalVisible} 
-      onOk={handleOk} 
-      onCancel={handleCancel} 
-      width={1200}>
-      <div>
-        id : {modalKey}
-      </div>
-      <Chart />
-    </Modal> */}
     </>
   );
 }
