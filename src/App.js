@@ -4,10 +4,10 @@ import { Layout, Menu, } from 'antd';
 import { UserOutlined, MonitorOutlined, DatabaseFilled, AppstoreOutlined } from '@ant-design/icons';
 import { Switch, Route, Link} from 'react-router-dom';
 
-import QualityMonitoring from './component/QualityMonitoring';
-import UserLog from './component/UserLog';
+import TableQualityMonitoring from './component/TableQualityMonitoring';
+import TableUserLog from './component/TableUserLog';
 import tableTop from './component/tabletop'
-import TopTenModule from './component/TopTenModule'
+import TableTopTenModule from './component/TableTopTenModuleVisit'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -20,12 +20,11 @@ function App() {
       <Header className="header">
         <div className="logo" />
       </Header>
-      <Layout>
+      <Layout style={{minHeight: '100vh'}}>
         <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
             selectedKeys = {navigateKey}
-            // defaultOpenKeys={['sidenav1']}
             style={{ height: '100%', borderRight: 0 }}
             onClick={(e) => setNavigateKey(e.key)}
             theme="dark"
@@ -53,10 +52,10 @@ function App() {
             }}
           >
             <Switch>
-              <Route exact path="/qualityMonitoring" component={QualityMonitoring} />
-              <Route exact path="/userLog" component={UserLog} />
+              <Route exact path="/qualityMonitoring" component={TableQualityMonitoring} />
+              <Route exact path="/userLog" component={TableUserLog} />
               <Route exact path="/tableTop" component={tableTop} />
-              <Route exact path="/topTenModule" component={TopTenModule} />
+              <Route exact path="/topTenModule" component={TableTopTenModule} />
             </Switch>
           </Content>
         </Layout>

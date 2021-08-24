@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { Table, Space, Button, Modal, Input } from 'antd';
-// import { SearchOutlined } from '@ant-design/icons'
 
-import dataDummy from '../data/dataQualityDummy.json'
+import dataQualityDummy from '../data/qualityDummy.json'
 import Chart from '../chart/ChartQualityMonitoring'
 
 function QualityMonitoring() {
@@ -97,13 +96,13 @@ function QualityMonitoring() {
     },
   ]
 
-  const [dataSource, setDataSource] = useState(dataDummy);
+  const [dataSource, setDataSource] = useState(dataQualityDummy);
   const [valueSearch, setValueSearch] = useState('');
 
   function handleSearch (key){
     const currValue = key;
     setValueSearch(currValue);
-    const filteredData = dataDummy.filter(entry =>
+    const filteredData = dataQualityDummy.filter(entry =>
       entry.date.toString().includes(currValue.toLowerCase()) ||
       entry.group.toLowerCase().includes(currValue.toLowerCase()) ||
       entry.source.toLowerCase().includes(currValue.toLowerCase()) ||

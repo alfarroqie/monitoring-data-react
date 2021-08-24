@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Table, Input } from 'antd';
+import { Table, Input, Tag } from 'antd';
 
 import dataLog from '../data/userModuleLogs.json'
 
@@ -33,6 +33,17 @@ function UserLog() {
       title: 'Roles',
       dataIndex: 'roles',
       key: 'roles',
+      render: roles => (
+        <>
+          {roles.map(role => {
+            return (
+              <Tag color='blue' key={role}>
+                {role.replace('_', ' ').replace('_', ' ').toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
     },
     {
       title: 'Module Name',
@@ -52,7 +63,7 @@ function UserLog() {
       entry.module_id.toString().includes(currValue.toLowerCase()) ||
       entry.module_type.toLowerCase().includes(currValue.toLowerCase()) ||
       entry.username.toLowerCase().includes(currValue.toLowerCase()) ||
-    //   entry.roles.includes(currValue.toLowerCase()) ||
+      // entry.roles.includes(currValue.toLowerCase()) ||
       entry.module_name.toLowerCase().includes(currValue.toLowerCase())
     );
     setDataSource(filteredData);
