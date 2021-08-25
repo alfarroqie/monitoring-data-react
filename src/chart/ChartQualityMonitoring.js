@@ -6,7 +6,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import chardData from '../data/chartDummy.json'  
 import { useLayoutEffect } from "react";
   
-function Chart() {
+function ChartQualityMonitoring() {
     const c = useRef(null);
     useLayoutEffect(() => {
         am4core.useTheme(am4themes_animated);  
@@ -86,4 +86,4 @@ function Chart() {
     )
 }
 
-export default Chart
+export default ChartQualityMonitoring

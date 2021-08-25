@@ -55,19 +55,19 @@ function UserLog() {
   const [dataSource, setDataSource] = useState(dataUserModuleLog);
   const [valueSearch, setValueSearch] = useState('');
 
-  function handleSearch(key){
+  function handleSearch (key) {
     const currValue = key;
     setValueSearch(currValue);
-    const filteredData = dataUserModuleLog.filter(entry =>
-      entry.date.includes(currValue.toLowerCase()) ||
-      entry.module_id.toString().includes(currValue.toLowerCase()) ||
-      entry.module_type.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.username.toLowerCase().includes(currValue.toLowerCase()) ||
-      // entry.roles.includes(currValue.toLowerCase()) ||
-      entry.module_name.toLowerCase().includes(currValue.toLowerCase())
+    const filterTable = dataUserModuleLog.filter(o =>
+      Object.keys(o).some(k =>
+        String(o[k])
+          .toLowerCase()
+          .includes(currValue.toLowerCase())
+      )
     );
-    setDataSource(filteredData);
-  }
+    setDataSource(filterTable);
+  };
+
   return (
     <>
     <div className="UserLog">

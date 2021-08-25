@@ -98,25 +98,19 @@ function QualityMonitoring() {
 
   const [dataSource, setDataSource] = useState(dataQualityDummy);
   const [valueSearch, setValueSearch] = useState('');
-
-  function handleSearch (key){
+  
+  function handleSearch (key) {
     const currValue = key;
     setValueSearch(currValue);
-    const filteredData = dataQualityDummy.filter(entry =>
-      entry.date.toString().includes(currValue.toLowerCase()) ||
-      entry.group.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.source.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.pic.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.dependents.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.kpi.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.current_value.toString().includes(currValue.toLowerCase()) ||
-      entry.threshold.toString().includes(currValue.toLowerCase()) ||
-      entry.status.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.remark.toLowerCase().includes(currValue.toLowerCase()) ||
-      entry.aging.toString().includes(currValue.toLowerCase())
+    const filterTable = dataQualityDummy.filter(o =>
+      Object.keys(o).some(k =>
+        String(o[k])
+          .toLowerCase()
+          .includes(currValue.toLowerCase())
+      )
     );
-    setDataSource(filteredData);
-  }
+    setDataSource(filterTable);
+  };
   return (
     <>
     <div className="QualityMonitoring">

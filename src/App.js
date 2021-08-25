@@ -6,8 +6,8 @@ import { Switch, Route, Link} from 'react-router-dom';
 
 import TableQualityMonitoring from './component/TableQualityMonitoring';
 import TableUserLog from './component/TableUserLog';
-import tableTop from './component/tabletop'
 import TableTopTenModule from './component/TableTopTenModuleVisit'
+import TableUserModuleVisit from './component/TableUserModuleVisit'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -32,7 +32,7 @@ function App() {
             <SubMenu key="sidenav1" icon={<DatabaseFilled />} title="Data">
               <Menu.Item key="qualityMonitoring" icon={<MonitorOutlined />}><Link to='/qualityMonitoring'/>Quality Monitoring</Menu.Item>
               <Menu.Item key="userLog" icon={<UserOutlined />}><Link to='/userLog'/>User Log</Menu.Item>
-              <Menu.Item key="tableTop" icon={<AppstoreOutlined />}><Link to='/tableTop'/>Table Top Ten</Menu.Item>
+              <Menu.Item key="userModuleVisit" icon={<AppstoreOutlined />}><Link to='/userModuleVisit'/>User Module Visit</Menu.Item>
               <Menu.Item key="topTenModule" icon={<AppstoreOutlined />}><Link to='/topTenModule'/>Top Ten Module</Menu.Item>
             </SubMenu>
           </Menu>
@@ -54,7 +54,7 @@ function App() {
             <Switch>
               <Route exact path="/qualityMonitoring" component={TableQualityMonitoring} />
               <Route exact path="/userLog" component={TableUserLog} />
-              <Route exact path="/tableTop" component={tableTop} />
+              <Route exact path="/userModuleVisit" component={TableUserModuleVisit} />
               <Route exact path="/topTenModule" component={TableTopTenModule} />
             </Switch>
           </Content>
