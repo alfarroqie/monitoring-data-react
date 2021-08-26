@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Table, Space, Button, Modal, Input } from 'antd';
 
 import dataQualityDummy from '../data/qualityDummy.json'
-import Chart from '../chart/ChartQualityMonitoring'
+import Chart from './ChartQuality'
 
 function QualityMonitoring() {
   const [isModalVisible, setIsModalVisible] = useState(false);
