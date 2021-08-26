@@ -1,31 +1,11 @@
 import React from 'react';
 import { Table } from 'antd';
-import dataLog from '../data/userModuleLogs.json'
 
-//function to return data visit module counted
-export const moduleVisitData = () => {
-  const result = [];
-   //Mapping data for module visit count
-  const userModuleLogsData = dataLog.data.user_module_logs.map((item) => {
-    return {
-        id: item.module_id,
-        name: item.module_name,
-        type: item.module_type,
-        visit: 1
-    }
-  })
-  //Count Module Visit Berdasarkan module id
-    userModuleLogsData.reduce(function(res, value) {
-      if (!res[value.id]) {
-        res[value.id] = { id: value.id, name: value.name, type: value.type, visit: 0 };
-        result.push(res[value.id])
-      }
-      res[value.id].visit += value.visit;
-      return res;
-  }, {});
-  
-  return result;
-}
+import {getModuleVisitData} from './UserModuleVisit'
+
+//Get Module Visit Data, Sort and limit to top ten module visit
+const topTenModuleVisitData = getModuleVisitData.apply();
+topTenModuleVisitData.sort(function(a,b){return a.visit < b.visit ? 1 : -1;}).slice(0,10);
 
 function TopTenModuleVisit() {
   const columns = [
@@ -50,8 +30,6 @@ function TopTenModuleVisit() {
         key: 'visit',
     },
 ]
-    //Sort and limit to top ten module visi
-    const topTenModuleVisitData = moduleVisitData().sort(function(a,b){return a.visit < b.visit ? 1 : -1;}).slice(0,10);
 
     return (
         <>

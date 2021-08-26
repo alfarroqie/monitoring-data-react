@@ -1,12 +1,37 @@
 import React, {useState} from 'react';
 import { Table, Input, Card } from 'antd';
 
-import {moduleVisitData} from './TableTopTenModuleVisit'
-import ChartModuleVisit from '../chart/ChartModuleVisit'
+import dataLog from '../data/userModuleLogs.json'
+import ChartModuleVisit from './ChartModuleVisit'
 
-const dataModuleVisit = moduleVisitData.apply();
+//function to get data visit module counted
+export const getModuleVisitData = () => {
+  const result = [];
+   //Mapping data for module visit count
+  const userModuleLogsData = dataLog.data.user_module_logs.map((item) => {
+    return {
+        id: item.module_id,
+        name: item.module_name,
+        type: item.module_type,
+        visit: 1
+    }
+  })
+  //Count Module Visit Berdasarkan module id
+    userModuleLogsData.reduce(function(res, value) {
+      if (!res[value.id]) {
+        res[value.id] = { id: value.id, name: value.name, type: value.type, visit: 0 };
+        result.push(res[value.id])
+      }
+      res[value.id].visit += value.visit;
+      return res;
+  }, {});
+  
+  return result;
+}
 
-function ModuleVisit() {
+const moduleVisitData = getModuleVisitData.apply();
+
+function UserModuleVisit() {
     const columns = [
       {
           title: 'Module Id',
@@ -30,13 +55,13 @@ function ModuleVisit() {
       },
   ]
 
-    const [dataSource, setDataSource] = useState(dataModuleVisit);
+    const [dataSource, setDataSource] = useState(moduleVisitData);
     const [valueSearch, setValueSearch] = useState('');
 
     function handleSearch (key) {
         const currValue = key;
         setValueSearch(currValue);
-        const filterTable = dataModuleVisit.filter(o =>
+        const filterTable = moduleVisitData.filter(o =>
           Object.keys(o).some(k =>
             String(o[k])
               .toLowerCase()
@@ -49,13 +74,13 @@ function ModuleVisit() {
       return (
         <>
         <div className="ModuleVisit">
-            <Card bordered={false}>
+            <Card bordered={true}>
                 <p style={{ fontWeight: 600, fontSize: "18px",}}>
                 Chart Module Visit
                 </p>
                 <ChartModuleVisit />
             </Card>
-            <Card bordered={false}>
+            <Card bordered={true}>
                 <p style={{ fontWeight: 600, fontSize: "18px",}}>
                 Table Module Visit
                 </p>
@@ -72,5 +97,6 @@ function ModuleVisit() {
         </div>
         </>
       );
-  }
-  export default ModuleVisit;
+}
+
+export default UserModuleVisit;

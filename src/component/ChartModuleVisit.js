@@ -3,7 +3,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-import {moduleVisitData} from '../component/TableTopTenModuleVisit'
+import {getModuleVisitData} from './UserModuleVisit'
 
 function ChartModuleVisit () {
   am4core.options.autoDispose = true;
@@ -13,7 +13,7 @@ function ChartModuleVisit () {
     //set style and data
     let chart = am4core.create("chartModuleVisit", am4charts.PieChart);
     chart.innerRadius = am4core.percent(40);
-    chart.data = moduleVisitData.apply();
+    chart.data = getModuleVisitData.apply();
     //set value
     let pieSeries = chart.series.push(new am4charts.PieSeries());
     pieSeries.dataFields.value = "visit";
